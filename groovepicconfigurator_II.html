@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>EPIC Configurator</title>
+	<style>
+		html { margin:0; padding:0; font-size:62.5%; }
+		body {margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; } <!--  max-width:800px; min-width:300px; -->
+		h1 { font-size:1.8em; }
+		.demo { overflow:auto; border:1px solid silver; min-height:100px; max-width:250px;}
+	</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="framework.js"></script>
+    <script src="epiciounit.js"></script>
+    <script src="epicreview.js"></script>
+    <script src="epicsvgparts.js"></script>
+    <script src="epicpartsviewer.js"></script>
+    <script src="samplespecs.js"></script>
+    
+</head>
+<body>
+	<div id="epic"></div>
+	<script>
+		window.addEventListener('load', function() {
+			//KEEP example of self calling function
+			/*(function(){
+				alert('when called?')
+			})(); */
+			var eConfigurator = new EpicConfigurator('epic');
+			eConfigurator.init();
+			
+		});
+	
+	</script>
+</body>
+</html>
