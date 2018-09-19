@@ -166,7 +166,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			var partNo = partsIO[i].partNo;
 			var des = partsIO[i].description;
 			var rangeDes = partsIO[i].rangeDes;
-			var str1 = '<div class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'"><table class="frame"><tr><td><input class="tag" type=checkbox>&nbsp;'+partNo+'</td></tr><tr><td><table><tr><!--<td class="modchck"><input class="tag" type=checkbox></td>--><td style="width: 100px"><button class="placepart" value="'+partNo+'"><--Place</button></td>';
+			var str1 = '<div class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'"><table class="frame"><tr><td><input class="tag" type=checkbox>&nbsp;'+partNo+'</td></tr><tr><td style="padding-top:10px !important;padding-bottom:10px !important;"><table><tr><!--<td class="modchck"><input class="tag" type=checkbox></td>--><td style="width: 100px"><button type="button" class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place</button></td>';
 			var catString = '';
 			for (var n=0; n<partsIO[i].cat.length; n++){
 				catString += '<td><div class="modfeature" cat="' + partsIO[i].cat[n] + '" hstate=0></div></td>';
