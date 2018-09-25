@@ -19,7 +19,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 	this.init = init;
 	function init(){
 		
-		$('#' + divContainerID).append('<div id="'+ list.id +'"><div class="selector" id="ctlrSelector" state="0"><table class="selTitle"><tr><td>&nbsp;</td><td>EPIC Controller</td><td class="showhide"></td></tr></table></div><div class="selector" id="pwrSelector" state="0"><table class="selTitle"><tr><td>&nbsp;</td><td>EPIC Power Supplies</td><td class="showhide"></td></tr></table></div><div class="selector" id="ioSelector" state="0"><table class="selTitle"><tr><td>&nbsp;</td><td>Input/Output Modules</td><td class="showhide"></td></tr></table></div></div>');
+		$('#' + divContainerID).append('<div id="'+ list.id +'"><div class="selector" id="ctlrSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">EPIC Controller</td><td class="showhide"></td></tr></table></div><div class="selector" id="pwrSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">EPIC Power Supplies</td><td class="showhide"></td></tr></table></div><div class="selector" id="ioSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">Input/Output Modules</td><td class="showhide"></td></tr></table></div></div>');
 		
 		// ********************************************************************************************
 		// *************************** build Controller Selector **************************** //
@@ -31,7 +31,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			var des = partsCtlr[i].description;
 			var index = parseInt(list.imagesArray.push(partsCtlr[i].images));
 			index -= 1;
-		var str1 = '<div class="part" index='+index+'><p>The groov EPIC controller is required with any epic I/O system. It is already selected and placed on the chassis. More information about the controller: </p> <table><tr><td>'+partNo+'</td><td>Description: '+des+'</td></tr></table><table class="ctrl"><tr> <td style="width:50%"><img src="'+list.res+partNo+'.png" index=0></img></td>  <td>  <table> <tr><td style="width: 50%"><button class="prevImg"><-</button><button class="nextImg">-></button></td></tr> <tr> <td><p class="figcap"></p></td> </tr> </table></td> </tr></table></div>';
+		var str1 = '<div style="margin: 4px 20px;" class="part" index='+index+'><p>The groov EPIC controller is required with any epic I/O system. It is already selected and placed on the chassis. More information about the controller: </p> <table><tr><td>'+partNo+'</td><td>Description: '+des+'</td></tr></table><table class="ctrl"><tr> <td style="width:50%"><img src="'+list.res+partNo+'.png" index=0></img></td>  <td>  <table> <tr><td style="width: 50%"><button class="btn btn-default prevImg"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span></button><button class="btn btn-default nextImg"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-right"></span></button></td></tr> <tr> <td><p class="figcap"></p></td> </tr> </table></td> </tr></table></div>';
 			$ctlr.append(str1);
 		}
 		
@@ -84,7 +84,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		
 		for (var i=0; i<partsPwr.length; i++){
 			var partNo = partsPwr[i].partNo;
-			var str1 = '<div class="part" partNo="'+partNo+'"><table class="pwr"><tr><td><img src="'+list.res+partNo+'.png"/></td><td>'+partNo+'<br/>Description: '+ partsPwr[i].description +'</td></tr></table><button class="placepart" value="'+partNo+'">Place '+partNo+'</button></div>';
+			var str1 = '<div style="margin: 4px 20px;" class="part" partNo="'+partNo+'"><table class="pwr"><tr><td><img src="'+list.res+partNo+'.png"/></td><td>'+partNo+'<br/>Description: '+ partsPwr[i].description +'</td></tr></table><button class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place '+partNo+'</button></div>';
 			$pwr.append(str1);
 		}
 		
@@ -92,7 +92,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		// ****************************** build I/O selector ******************************* //
 		var $this = $(list.searchID).find('div#ioSelector');
 		
-		$this.append('<div class="partslist"><div id="iomenu" style="margin: 3px 0px 4px 10px">Sort by: <br><button id="all_btn"></button>&nbsp;&nbsp;<button class="cat" id="ai" des="analog input" state=0/><button class="cat" id="ao" des="analog ouput" state=0/><button class="cat" id="di" des="digital input" state=0/><button class="cat" id="do" des="digital output" state=0/><button class="cat" id="ser" des="Serial" state=0/><p><input id="showchck" type="checkbox">Show checked</input><input id="featurechart" type="checkbox">Show checked items in a feature-comparison chart</input></p><div id="modsubmenu"></div><div id="header"><table id="modcat"><tr><td>Part Number</td><td>Features</td><td style="text-align:right">More Information</td></tr></table></div></div></div>');//<button class="cat" id="ser"/>
+		$this.append('<div class="partslist"><div id="iomenu" style="margin: 4px 20px"><div style="padding-bottom:10px;">Filters:</div><button id="all_btn"></button>&nbsp;&nbsp;<button class="cat" id="ai" des="analog input" state=0/><button class="cat" id="ao" des="analog ouput" state=0/><button class="cat" id="di" des="digital input" state=0/><button class="cat" id="do" des="digital output" state=0/><button class="cat" id="ser" des="Serial" state=0/><div class="checkbox"><label style="padding-right:20px;"><input id="showchck" type="checkbox">Show checked</input></label><label><input id="featurechart" type="checkbox">Show checked items in a feature-comparison chart</input></label></div><div id="modsubmenu"></div></div></div>');//<button class="cat" id="ser"/>
 		
 		$(list.searchID).find('button#do').css({'background': 'url('+list.res + 'do_sm.png) no-repeat center', 'width': '79px', 'height': '54px'});
 		$(list.searchID).find('button#ai').css({'background': 'url('+list.res + 'ai_sm.png) no-repeat center', 'width': '79px', 'height': '54px'});
@@ -106,7 +106,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			e.preventDefault();
 			//all button just turns itself on. It doesn't toggle on and off for it might not be logical to revert to another state after the variety of searches the user can do.
 			$(this).css({'background-color': 'rgba(251,176,59,0.7)'});
-			$(list.searchID).find('div.module').show();
+			$(list.searchID).find('tr.module').show();
 			$(list.searchID).find('button.cat').css({'background-color': '#ffffff'})
 				.attr('state', 0);
 			$(list.searchID).find('span.fmenu').css({'background-color': '#ffffff'})//was div.fmenu
@@ -134,14 +134,14 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 				button.siblings('button.cat').attr('state', 0)
 				button.siblings('div#modsubmenu').show();
 				$(list.searchID).find('td#fdes').text('Features for '+button.attr('des') + ' modules: ');
-				$(list.searchID).find('div.module').hide();
+				$(list.searchID).find('tr.module').hide();
 				
-				var items = $(list.searchID).find('div[iogroup='+id+']').show();
+				var items = $(list.searchID).find('tr[iogroup='+id+']').show();
 				$(list.searchID).find('#showchck').attr('checked', false);	//set checkbox to unselected
 			} else {
 				button.attr('state', 0);	
 				button.css({'background-color': '#ffffff'});
-				$(list.searchID).find('div.module').show();
+				$(list.searchID).find('tr.module').show();
 				$(list.searchID).find('button#all_btn').css({'background-color': 'rgba(251,176,59,0.7)'});
 			}
 			
@@ -162,17 +162,46 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		});
 	
 		// ************************ build list of modules **************************** //
+		var tableStart = '<div id="header"><table class="table table-striped" id="modcat"><thead><tr><th> </th><th>Part Number</th><th>Add Module</th><th>Features</th><th style="text-align:right">More Information</th></tr></thead><tbody>';
+		var tableEnd = '</tbody></table></div>';
+		var modules = [];
+
 		for (var i=0; i<partsIO.length; i++){
+			if (i == 0) {
+				modules.push(tableStart);
+			}
+
 			var partNo = partsIO[i].partNo;
 			var des = partsIO[i].description;
 			var rangeDes = partsIO[i].rangeDes;
-			var str1 = '<div class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'"><table class="frame"><tr><td><input class="tag" type=checkbox>&nbsp;'+partNo+'</td></tr><tr><td style="padding-top:10px !important;padding-bottom:10px !important;"><table><tr><!--<td class="modchck"><input class="tag" type=checkbox></td>--><td style="width: 100px"><button type="button" class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place</button></td>';
+			// var str1 = '<div class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'">';
+			// var strNext1 = '<tr><td style="padding-left:10px;padding-top:10px !important;padding-bottom:10px !important;"><table><tr><!--<td class="modchck"><input class="tag" type=checkbox></td>--><td style="width: 100px"><button type="button" class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place</button></td>';
+			
+
+			var teststr1 = '<tr class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'">';
+			var teststr2 = '<td style="padding-left:10px;line-height: 34px;"><input class="tag" type="checkbox"></td>';
+			var teststr3 = '<td style="padding-left:10px;line-height: 34px;">'+partNo+'</td>';;
+			var teststr4 = '<td style="width: 100px"><button type="button" class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place</button></td>';
+			var teststr5 = '<td style="width:34px"><button class="showhide" state=0></button></td>'
+
+
 			var catString = '';
+			catString += '<td style="line-height: 34px;">';
 			for (var n=0; n<partsIO[i].cat.length; n++){
-				catString += '<td><div class="modfeature" cat="' + partsIO[i].cat[n] + '" hstate=0></div></td>';
+				catString += '<div class="modfeature" cat="' + partsIO[i].cat[n] + '" hstate=0></div>';
 			}
-			var str2 = '<td>'+rangeDes+'</td><td style="width:34px"><button class="showhide" state=0></button></td></tr></table> <div class="details"><table><tr><td></td><td>'+des+'</td></tr></table></div></td></tr></table></div>' ;
-			$this.append(str1 + catString + str2);
+			catString += '<div style="float: left; padding-left:10px;">' + rangeDes + '</div></td>';
+			// var str2 = '<td>'+rangeDes+'</td><td style="width:34px"><button class="showhide" state=0></button></td></tr></table> <div class="details"><table><tr><td></td><td>'+des+'</td></tr></table></div></td></tr></div>' ;
+			var end = '</tr> <tr class="details-row" style="background-color:#fff !important"><td colspan="5"><div class="details">'+des+'</div></td></tr> <tr style="background-color:#fff !important"></tr>'; // <div class="details">'+des+'</div>
+			// modules.push(str1 + catString + str2);
+			var final = teststr1 + teststr2 + teststr3 + teststr4 + catString + teststr5 + end;
+
+			modules.push(final);
+			if (i == partsIO.length - 1) {
+				// final += tableEnd;
+				modules.push(tableEnd);
+				$this.append(modules.join(""));
+			}
 		}
 			
 		// ******************* end build I/O selector ********************** //
@@ -222,8 +251,8 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 					var len = $(list.searchID).find('button.cat[state=1]').length;
 					if (len > 0 ){
 						var iogroup = $(list.searchID).find('button.cat[state=1]').attr('id');
-						$(list.searchID).find('div.module').hide();
-						$(list.searchID).find('div.module[iogroup='+iogroup+']').show();
+						$(list.searchID).find('tr.module').hide();
+						$(list.searchID).find('tr.module[iogroup='+iogroup+']').show();
 					}
 				} else {
 					selector.attr('state', 0);
@@ -243,17 +272,17 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 				.siblings('div.part').css('border','');
 		});
 		
-		$(list.searchID).find('div.module').find('button.showhide').on('click', this, function(e){
+		$(list.searchID).find('tr.module').find('button.showhide').on('click', this, function(e){
 			e.preventDefault();
 			var button = e.currentTarget;
 			var state = $(button).attr('state');
 			if(state == 0) {
 				$(button).attr('state', 1);
-				$(this).parentsUntil('div.module').siblings('.details').show();
+				$(this).closest('tr.module').next(".details-row").show();
 				$(button).css({'background': 'url('+list.res + 'arrowdown_white.png) no-repeat center'});
 			} else {
 				$(button).attr('state', 0);
-				$(this).parentsUntil('div.module').siblings('.details').hide();
+				$(this).closest('tr.module').next(".details-row").hide();
 				$(button).css({'background': 'url('+list.res+ 'arrowleft_white.png) no-repeat center'});
 			}
 		});
@@ -262,15 +291,15 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		$('input#showchck').on('click', this, function(e){
 			var val = $(e.currentTarget).is(':checked');
 			if (val == true) { //show checked items
-				$(list.searchID).find('div.module').hide();
-				$(list.searchID).find('div.module[checkstate*="t"]').show(); //checkstate is a proxy for the checkbox value
+				$(list.searchID).find('tr.module').hide();
+				$(list.searchID).find('tr.module[checkstate*="t"]').show(); //checkstate is a proxy for the checkbox value
 				$(list.searchID).find('#all_btn').css({'background-color':'#ffffff'});//'background-color': 'rgba(251,176,59,0.7)'
 				$(list.searchID).find('div#modsubmenu').hide();
 				$(list.searchID).find('button.cat').attr('state', 0)
 					.css({'background-color': '#ffffff'});
 
 			} else { //restore full list (it may be more intuitive to bring the whole list back (and programmatically easier) rather than restore the last state
-				$(list.searchID).find('div.module').show();
+				$(list.searchID).find('tr.module').show();
 				$(list.searchID).find('button.cat').css({'background-color': '#ffffff'});//this needs to reset backgrounds for io type buttons
 				$(list.searchID).find('#all_btn').css({'background-color':'rgba(251,176,59,0.7)'});
 			}
@@ -283,14 +312,14 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			var val = $(e.currentTarget).is(':checked');
 			
 			if (val == true) { //show checked items
-				$(list.searchID).find('div.module').hide();
-				$(list.searchID).find('div.module[checkstate*="t"]').show(); //checkstate is a proxy for the checkbox value
+				$(list.searchID).find('tr.module').hide();
+				$(list.searchID).find('tr.module[checkstate*="t"]').show(); //checkstate is a proxy for the checkbox value
 				$(list.searchID).find('#all_btn').css({'background-color':'#ffffff'});//'background-color': 'rgba(251,176,59,0.7)'
 				$(list.searchID).find('div#modsubmenu').hide();
 				$(list.searchID).find('button.cat').attr('state', 0)
 					.css({'background-color': '#ffffff'});
 				
-				var parts = $(list.searchID).find('div.module[checkstate*="t"]');
+				var parts = $(list.searchID).find('tr.module[checkstate*="t"]');
 				var partNoArray = [];
 				for (var i = 0; i<parts.length; i++){
 					partNoArray.push($(parts[i]).attr('partNo'));
@@ -299,7 +328,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			
 			} else { //restore full list (it may be more intuitive to bring the whole list back (and programmatically easier) rather than restore the last state
 				$(list.searchID).find('div#featureChart').remove();
-				$(list.searchID).find('div.module').show();
+				$(list.searchID).find('tr.module').show();
 				$(list.searchID).find('button.cat').css({'background-color': '#ffffff'});//this needs to reset backgrounds for io type buttons
 				$(list.searchID).find('#all_btn').css({'background-color':'rgba(251,176,59,0.7)'});
 			}
@@ -309,9 +338,9 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		$(list.searchID).find('input.tag').on('click', this, function(e){	
 			var val = $(e.currentTarget).is(':checked');
 			if (val == true){
-				$(e.currentTarget).parents('div.module').attr('checkstate', 't'); //set div parent's checkstate property
+				$(e.currentTarget).parents('tr.module').attr('checkstate', 't'); //set div parent's checkstate property
 			} else {
-				$(e.currentTarget).parents('div.module').attr('checkstate', '');//clear div parent's checkstate property
+				$(e.currentTarget).parents('tr.module').attr('checkstate', '');//clear div parent's checkstate property
 			}
 		});
 		
@@ -354,11 +383,11 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			}
 			
 			if (selectedFeatures.length == 0) {
-				$(list.searchID).find('div.module[iogroup='+iogroup+']').show();
+				$(list.searchID).find('tr.module[iogroup='+iogroup+']').show();
 			}else{
-				$(list.searchID).find('div.module').hide();
+				$(list.searchID).find('tr.module').hide();
 				var modfeatures = []; //one or more features of each module in the parts list.
-				var modules = $(list.searchID).find('div.module[iogroup='+iogroup+']'); //get all brain objects (part numbers, one or more brain features)
+				var modules = $(list.searchID).find('tr.module[iogroup='+iogroup+']'); //get all brain objects (part numbers, one or more brain features)
 				var tempArray = [] ;//received found parts and is used to replace brains array at the end of each loop
 				for (var i=0; i<selectedFeatures.length; i++){  //go through each feature on the submenu that is selected
 					$(modules).hide();
@@ -402,18 +431,23 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			
 		$(list.searchID).find('button.showhide').css({ background: 'url('+ list.res+'arrowleft_white.png) no-repeat center', height: '32px', width: '32px', float: 'right',	border: 'none',});
 		$(list.searchID).find('td.showhide').css({ background: 'url('+ list.res+'arrowleft_white.png) no-repeat center', height: '32px', width: '32px', float: 'right',	border: 'none',});
-		$(list.searchID).find('div.modfeature').css('border', '1px solid rgba(100,100,150,.5)'); //border around icons in modules part descriptions
+		$(list.searchID).find('div.modfeature').css({'border': '1px solid rgba(100,100,150,.5)', 'float': 'left', 'margin-right': '5px'}); //border around icons in modules part descriptions
 		$(list.searchID).find('div#fdes').css({'padding-top': '6px'});
 		$(list.searchID).find('span.fmenu').css({'border': '1px solid rgba(100,100,150,.5)', 'padding-top': '8px', 'display':'inline-block'}); 
 		$(list.searchID).find('img.ifmenu').css({'height': '20px', 'width': '20px'});
-		$(list.searchID).find('div.module table.frame').css({'border': '2px solid #f2f2f2', 'width': '100%'});
+		// $(list.searchID).find('tr.module table.frame').css({'border': '2px solid #f2f2f2', 'width': '100%'});
 		$(list.searchID).find('table#modcat').css({'border': '2px solid #f2f2f2', 'width': '100%'});
-		$(list.searchID).find('div.module').css({'margin-left': '20px', 'margin-right': '10px', }) //'border': '2px solid rgba(247,147,30,1)'
-			.find('.details').hide();
+		$(list.searchID).find('tr.module').css({'margin-left': '20px', 'margin-right': '10px', }) //'border': '2px solid rgba(247,147,30,1)'
+		$(list.searchID).find('tr.module').next(".details-row").hide();
 		
 		$(list.searchID).find('.modchck').css({'width': '30px'});
 		$(list.searchID).find('div.selector').children('div').hide();
-		$(list.searchID).find('div.selector').children('.selTitle').css({'padding':'2px 2px 2px 5px'});
+		$(list.searchID).find('div.selector').children('.selTitle').css({'cursor':'pointer'});
+				$(list.searchID).find('div.selector').children('.selTitle').hover(function(){
+		    $(this).css({opacity:'0.8'});
+		}, function(){
+		    $(this).css({opacity:'1'});
+		});
 		
 		return list.showPartInViewer;
 		
@@ -601,7 +635,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 				case 'mod' :
 					var io = $(list.searchID).find('div#ioSelector');
 					var state = parseInt(io.attr('state'));
-					io.children('div.module').css({'border': ''});
+					io.children('tr.module').css({'border': ''});
 				
 					if(state==0){//no module selected, open module viewer.
 						//console.log('This must deal with module tab')
@@ -613,8 +647,8 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 						if (len > 0 ){
 							
 							var iogroup = $(list.searchID).find('button.cat[state=1]').attr('id');
-							$(list.searchID).find('div.module').hide();
-							$(list.searchID).find('div.module[iogroup='+iogroup+']').show();
+							$(list.searchID).find('tr.module').hide();
+							$(list.searchID).find('tr.module[iogroup='+iogroup+']').show();
 							
 						} else {
 							
@@ -635,11 +669,11 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 				break;	
 				
 				case 'details':
-					var module = $(list.searchID).find('div.module[partNo='+part+']');
+					var module = $(list.searchID).find('tr.module[partNo='+part+']');
 					module.css({'border': '2px solid rgba(247,147,30,1)'});
 					
 					//show module details, set arrow and state
-					module.find('.details').show();
+					module.next(".details-row").show();
 					module.find('button.showhide').css({'background': 'url('+list.res + 'arrowdown_white.png) no-repeat center'})
 						.attr('state', 1)
 					
@@ -653,8 +687,8 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 				//and not scrolled to because I've not enabled the scrolling by closing the window height. This was because I'd end up with two horizontal scrollbars which is confusing.
 				if(test==false){
 					var iogroup = module.attr('iogroup');
-					$(list.searchID).find('div.module').hide();
-					$(list.searchID).find('div.module[iogroup='+iogroup+']').show();
+					$(list.searchID).find('tr.module').hide();
+					$(list.searchID).find('tr.module[iogroup='+iogroup+']').show();
 					$container.animate({//from https://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
 						scrollTop: module.offset().top - $container.offset().top - 50 + $container.scrollTop() 
 					});
@@ -670,7 +704,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 					$(list.searchID).find('#showchck').attr('checked', false);
 					button.siblings('div#modsubmenu').show();
 					$(list.searchID).find('td#fdes').text('Features for '+button.attr('des') + ' modules: ');
-					var items = $(list.searchID).find('div[iogroup='+iogroup+']').show();
+					var items = $(list.searchID).find('tr[iogroup='+iogroup+']').show();
 						
 					$(list.searchID).find('span.fmenu').hide();//was div.fmenu
 					for(var i = 0; i<list.ioFeatures.length; i++){
