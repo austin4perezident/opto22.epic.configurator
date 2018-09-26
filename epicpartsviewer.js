@@ -525,7 +525,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 				if((test=='boolean')||(test=='number')||(test=='string')){
 					if(test=='boolean'){
 						if(data==true){
-							tableString += '<td><img src="'+ list.res+'check.png"/></td>'	;
+							tableString += '<td><img style="max-width:34px;" src="'+ list.res+'check.png"/></td>'	;
 						} else {
 							tableString += '<td style="color: #666;">no</td>';
 						}
