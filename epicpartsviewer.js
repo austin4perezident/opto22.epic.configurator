@@ -162,43 +162,42 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		});
 	
 		// ************************ build list of modules **************************** //
-		var tableStart = '<div id="header"><table class="table table-striped" id="modcat"><thead><tr><th> </th><th>Part Number</th><th>Add Module</th><th>Features</th><th style="text-align:right">More Information</th></tr></thead><tbody>';
-		var tableEnd = '</tbody></table></div>';
 		var modules = [];
 
 		for (var i=0; i<partsIO.length; i++){
-			if (i == 0) {
-				modules.push(tableStart);
-			}
-
 			var partNo = partsIO[i].partNo;
 			var des = partsIO[i].description;
 			var rangeDes = partsIO[i].rangeDes;
-			// var str1 = '<div class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'">';
-			// var strNext1 = '<tr><td style="padding-left:10px;padding-top:10px !important;padding-bottom:10px !important;"><table><tr><!--<td class="modchck"><input class="tag" type=checkbox></td>--><td style="width: 100px"><button type="button" class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place</button></td>';
-			
-
-			var teststr1 = '<tr class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'">';
-			var teststr2 = '<td style="padding-left:10px;line-height: 34px;"><input class="tag" type="checkbox"></td>';
-			var teststr3 = '<td style="padding-left:10px;line-height: 34px;">'+partNo+'</td>';;
-			var teststr4 = '<td style="width: 100px"><button type="button" class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place</button></td>';
-			var teststr5 = '<td style="width:34px"><button class="showhide" state=0></button></td>'
-
-
 			var catString = '';
-			catString += '<td style="line-height: 34px;">';
-			for (var n=0; n<partsIO[i].cat.length; n++){
-				catString += '<div class="modfeature" cat="' + partsIO[i].cat[n] + '" hstate=0></div>';
-			}
-			catString += '<div style="float: left; padding-left:10px;">' + rangeDes + '</div></td>';
-			// var str2 = '<td>'+rangeDes+'</td><td style="width:34px"><button class="showhide" state=0></button></td></tr></table> <div class="details"><table><tr><td></td><td>'+des+'</td></tr></table></div></td></tr></div>' ;
-			var end = '</tr> <tr class="details-row" style="background-color:#fff !important"><td colspan="5"><div class="details">'+des+'</div></td></tr> <tr style="background-color:#fff !important"></tr>'; // <div class="details">'+des+'</div>
-			// modules.push(str1 + catString + str2);
-			var final = teststr1 + teststr2 + teststr3 + teststr4 + catString + teststr5 + end;
 
-			modules.push(final);
+			var tableStart = '<div id="header"><table class="table table-striped" id="modcat"><thead><tr><th> </th><th>Part Number</th><th>Add Module</th><th>Features</th><th style="text-align:right">More Information</th></tr></thead><tbody>';
+			var rowStart = '<tr class="module" id="'+partNo+'" iogroup="'+partsIO[i].iogroup+'" checkstate="f" partNo="'+partNo+'">';
+			var checkbox = '<td style="padding-left:10px;line-height: 34px;"><input class="tag" type="checkbox"></td>';
+			var partName = '<td style="padding-left:10px;line-height: 34px;">'+partNo+'</td>';;
+			var placePartButton = '<td style="width: 100px"><button type="button" class="btn btn-default placepart" value="'+partNo+'"><span style="font-size: 12px;" class="glyphicon glyphicon-triangle-left"></span> Place</button></td>';
+			var moreInfoButton = '<td style="width:34px"><button class="showhide" state=0></button></td>'
+			var rowEnd = '</tr>'
+			var detailsRow = '<tr class="details-row" style="background-color:#fff !important"><td colspan="5"><div class="details">'+des+'</div></td></tr> <tr style="background-color:#fff !important"></tr>';
+			var tableEnd = '</tbody></table></div>';
+
+			if (i == 0) modules.push(tableStart);
+			
+			for (var n=0; n<partsIO[i].cat.length; n++){
+				if (n == 0) catString += '<td style="line-height: 34px;">';
+				catString += '<div class="modfeature" cat="' + partsIO[i].cat[n] + '" hstate=0></div>';
+				if (n == partsIO[i].length - 1) catString += '<div style="float: left; padding-left:10px;">' + rangeDes + '</div></td>'; 
+			}
+
+			modules.push(rowStart + 
+									checkbox + 
+									partName + 
+									placePartButton + 
+									catString + 
+									moreInfoButton + 
+									rowEnd +
+									detailsRow);
+			
 			if (i == partsIO.length - 1) {
-				// final += tableEnd;
 				modules.push(tableEnd);
 				$this.append(modules.join(""));
 			}
