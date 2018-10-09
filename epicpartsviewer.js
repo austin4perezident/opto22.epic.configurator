@@ -581,7 +581,8 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		tableString += '</table></div>';
 		$(list.searchID).find('div#ioSelector').append(prestring+buttonString+tableString);
 		
-		$(list.searchID).find('button#print').on('click', this, function(){
+		$(list.searchID).find('button#print').on('click', this, function(e){
+			e.preventDefault();
 			list.printToWindow(prestring + tableString)
 		})
 	};
