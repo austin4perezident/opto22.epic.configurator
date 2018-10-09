@@ -1,18 +1,14 @@
 // JavaScript Document
 modspecs = [
-
-
 { 
 	partNo:  "GRV-IMA-24",
 	features: {
-	
 		"Analog totalizing" : true,
 		"Watchdog timer" : false,
 		"Minimum/maximum values" : true,
 		"Offset and gain" : true,
 		"Average filter weight" : true,
 		"Quality Indicator" : true,
-		
 		"Number of Channels": 24,
 	},
 	specifications: {
@@ -23,20 +19,20 @@ modspecs = [
       "Gain Temperature Coefficient": "ppm/°C",
       "Offset Temperature Coefficient": "ppm/°C",
       "Input Voltage Drop nominal (Impedance ± 20%)": "5.5 V nominal @ 20 mA (275 Ohms)",
-      "Input Filter (hardware)": "-3 dB at 140 Hz",
+      "Input Filter": "(hardware) -3 dB at 140 Hz",
       "Step Input Response Time": "277 ms x SMA value (8.8 s @ 32 SMA, Default SMA = 4 )",
-      "Data Freshness / Update": "277 ms",
+      "Data Freshness": "277 ms",
       "Analog Data Filtering": "-3 dB @ 2.4 Hz / -25 dB @ 60 Hz",
       "Software Data Filtering, simple moving average (SMA) and Weighted Filter": "SMA: 1 to 32 Readings, Filter Weight: 1 to 4096",
-      "AC/DC Common Mode Rejection": "> -120 dB",
+	  "Common Mode Rejection": "> -120 dB AC/DC",
       "Max. Survivable Input": "± 32 V",
       "Max. Operating Common Mode Voltage": "250 V",
-      "Problem Indications": "out of range",
+      "Problem Indication": "out of range",
       "Isolation (field-to-logic)": "300 V working, 1500 V transient (1 minute)",
       "Isolation (channel-to-channel)": "300V between zone A (ch 0–11) & zone B (ch 12–23)",
       "Chassis Power Consumption": "1.0 W",
 	  "Agency Approvals": "UL/cUL(Class 1 Div. 2); CE, ATEX(Category 3, Zone 2), RoHS; DFARS; CB Scheme",
-      "Warranty": "Lifetime"
+      "Warranty": "Lifetime",
 	},
 	mechanical: {
 	  "Wire Size": "28–14 AWG",
@@ -45,7 +41,6 @@ modspecs = [
       "Temperature (operating)": "-20 °C to +70 °C",
       "Temperature (storage)": "-40 °C to +85 °C",
       "Relative Humidity (non-condensing)": "5–95%",
-      
 	}
 },
 { 
@@ -60,11 +55,11 @@ modspecs = [
 		 "Number of Channels": 8,
 	},
 	specifications: {
-	 "Millivolt Input Ranges": "±1200.0 mV, ±600.0 mV, ±300.0 mV, ±150.0 mV, ±75.0 mV, ±50.0 mV, ±25.0 mV",
-      "Over range limits (± 10%)": "±1320.0 mV, ±660.0 mV, ±330.0 mV, ±165.0 mV, ±82.5 mV, ±55.0 mV, ±27.5 mV",
+	 "Input Range (per channel)": "±1200.0 mV, ±600.0 mV, ±300.0 mV, ±150.0 mV, ±75.0 mV, ±50.0 mV, ±25.0 mV",
+      "Over-range limits": "(± 10%) ±1320.0 mV, ±660.0 mV, ±330.0 mV, ±165.0 mV, ±82.5 mV, ±55.0 mV, ±27.5 mV",
       "Resolution": "mV Range / 1,048,576  (20 bits)",
-      "Accuracy 0.1% of Range": "±1200 µV, ±600 µV, ±300 µV, ±150 µV, ±75 µV, ±50 µV, ±50 µV",
-      "Thermocouple ITS90 Types": "Accuracy* / Resolution",
+      "Accuracy": " 0.1% of Range: ±1200 µV, ±600 µV, ±300 µV, ±150 µV, ±75 µV, ±50 µV, ±50 µV",
+      "Thermocouple ITS90 Types": "	Accuracy / Resolution",
       "B:   90 °C to 1,820 °C (194 °F to 3,308 °F)": "5.0 °C (9.0  °F)/  0.05 °C (0.1 °F)",
       "E: -270 °C to 1,000 °C (-454 °F to 1,832 °F)": "2.0 °C (3.6  °F)/ 0.05 °C (0.1 °F)",
       "J: -210 °C to 1,200 °C (-346 °F to 2,192 °F)": "2.0 °C (3.6  °F)/ 0.05 °C (0.1 °F)",
@@ -74,9 +69,10 @@ modspecs = [
       "S:  -50 °C to 1,768 °C (-58 °F to 3,214.4 °F)": "5.0 °C (9.0  °F)/ 0.05 °C (0.1 °F)",
       "T: -270 °C to  400 °C (-454 °F to 752 °F)": "3.0 °C (5.4  °F)/ 0.05 °C (0.1 °F)",
       "Cold Junction Compensation": "Automatic",
-      "Data Freshness (nominal)": "mV Ranges = 21 ms  /  T/C Ranges = 46 ms",
+      "Data Freshness": "(nominal) mV Ranges = 21 ms  /  T/C Ranges = 46 ms",
       "Analog Data Filtering": "-3 dB @ 2.4 Hz / -25 dB @ 60 Hz",
       "Software Data Filtering, simple moving average (SMA) and Weighted filter": "SMA (1 to 32 readings) and Filter Weight (1 to 4096)",
+	  
       "Step Response Time (to 1%)": "85 ms",
       "Common Mode Rejection": "> -120 dB AC/DC",
       "Input Resistance": "100 megohm",
@@ -85,17 +81,16 @@ modspecs = [
       "Isolation (field-to-logic)": "300 V working, 1500 V transient (1 minute)",
       "Isolation (channel-to-channel)": "300 V working, 1500 V transient (1 minute)",
       "Chassis Power Consumption": "1.4 W",
-	   "Agency Approvals": "UL/cUL (Class 1 Div. 2); CE, ATEX (Category 3, Zone 2), RoHS; DFARS; CB Scheme",
-      "Warranty": "Lifetime"
+	  "Agency Approvals": "UL/cUL (Class 1 Div. 2); CE, ATEX (Category 3, Zone 2), RoHS; DFARS; CB Scheme",
+      "Warranty": "Lifetime",
 	},
 	mechanical: {
-		"Wire Size": "28–14 AWG",
+	  "Wire Size": "28–14 AWG",
       "Torque, connector screw": "2.5 in-lb (0.28 N-m)",
       "Torque, hold-down screw": "3.5 in-lb (0.4 N-m)",
       "Temperature (operating)": "-20 °C to +70 °C",
       "Temperature (storage)": "-40 °C to +85 °C",
-      "Humidity (non-condensing)": "5–95% RH",
-     
+	  "Relative Humidity (non-condensing)": "5–95%",
 	},
 },
 { 
@@ -107,34 +102,33 @@ modspecs = [
 		"Offset and gain" : true,
 		"Average filter weight" : true,
 		"Quality Indicator" : true,
-		 "Number of Channels": 24,
+		"Number of Channels": 24,
 	},
 	specifications: {
-	  "Input Ranges": "±160.0 VDC, ±80.0 VDC, ±40.0 VDC, ±20.0 VDC, ±10.0 VDC, ±5.0 VDC, ±2.5 VDC, ±1.25 VDC",
+	  "Input Range (per channel)": "±160.0 VDC, ±80.0 VDC, ±40.0 VDC, ±20.0 VDC, ±10.0 VDC, ±5.0 VDC, ±2.5 VDC, ±1.25 VDC",
       "Over-range limits": "±176.0 VDC, ±88.0 VDC, ±44.0 VDC, ±22.0 VDC, ±11.0 VDC, ±5.5 VDC, ±2.75 VDC, ±1.375 VDC",
       "Resolution": "Range / 1,048,576 (20-bits)",
-      "Accuracy 0.1% of Range": "±160 mV, ±80 mV, ±40 mV, ±20 mV, ±10 mV, ±5 mV, ±2.5 mV, ±1.25 mV",
+      "Accuracy": "0.1% of Range: ±160 mV, ±80 mV, ±40 mV, ±20 mV, ±10 mV, ±5 mV, ±2.5 mV, ±1.25 mV",
       "Gain Temperature Coefficient": "ppm/°C",
       "Offset Temperature Coefficient": "ppm/°C",
       "Input Impedance Nominal": "9.7 MOhms",
       "Input Filter": "-3 dB at 460 HZ",
-      "Software Data Filtering, SMA ( simple moving average) and Weighted filter (Original)": "1 to 32 Readings,  moving average and (Original) 1 to 4096 Filter Weight",
-      "Step Input Response Time": "277 ms x SMA value (8.8 s @ 32 SMA, Default SMA = 4 )",
-      "Data Freshness / Update": "277 ms",
+      "Software Data Filtering, simple moving average (SMA) and Weighted Filter": "1 to 32 Readings,  moving average and (Original) 1 to 4096 Filter Weight",
+	  "Step Input Response Time": "277 ms x SMA value (8.8 s @ 32 SMA, Default SMA = 4 )",
+      "Data Freshness": "277 ms",
       "Analog Data Filtering": "-3 dB @ 2.4 Hz / -25 dB @ 60 Hz",
-      "DC Common Mode Rejection": "> -120 dB",
-      "AC Common Mode Rejection": "> -120 dB",
+	  "Common Mode Rejection": "> -120 dB AC/DC",
       "Max. Survivable Input": "300 V",
       "Max. Operating Common Mode Voltage": "250 V",
-      "Problem Indications": "out of range",
+      "Problem Indication": "out of range",
       "Isolation (field-to-logic)": "300 V working, 1500 V transient (1 minute)",
       "Isolation (channel-to-channel)": "300V Between Zone A (ch 0–11) & Zone B (ch12–23)",
       "Chassis Power Consumption": "1.0 W",
-     "Agency Approvals": "UL/cUL(Class 1 Div. 2); CE, ATEX(Category 3, Zone 2), RoHS; DFARS; CB Scheme",
-      "Warranty": "Lifetime"
+      "Agency Approvals": "UL/cUL(Class 1 Div. 2); CE, ATEX(Category 3, Zone 2), RoHS; DFARS; CB Scheme",
+      "Warranty": "Lifetime",
 	},
 	mechanical: {
-	  "Connector": "28–14 AWG",
+	  "Wire Size": "28–14 AWG",
       "Torque, connector screw": "2.5 in-lb (0.28 N-m)",
       "Torque, hold-down screw": "3.5 in-lb (0.4 N-m)",
       "Temperature (operating)": "-20 °C to +70 °C",
@@ -142,6 +136,8 @@ modspecs = [
       "Relative Humidity (non-condensing)": "5–95%",
 	},
 },
+
+
 { 
 	partNo:  "GRV-OVMALC-8",
 	features: {
@@ -554,7 +550,6 @@ modspecs = [
       "Temperature (operating)": "-20 °C to +70 °C",
       "Temperature (storage)": "-40 °C to +85 °C",
       "Relative Humidity (non-condensing)": "5–95%",
-      
 	},
 },
 { 
@@ -569,12 +564,11 @@ modspecs = [
 		"Output pulsing" : false,
 		"On/off totalization" : true,
 		"Channel-to-channel isolation" : false,
-		
-		 "Number of Channels": 24,
+		"Number of Channels": 24,
 	},
 	
 	specifications: {
- "Input Voltage (VDC)": "15–30 VDC",
+ 	  "Input Voltage": "15–30 VDC",
       "Turn ON Characteristic": "15 V, > 2 mA",
       "Turn OFF Characteristic": "5 V, < 0.5 mA",
       "Input Impedance (± 5%)": "Nonlinear per IEC input type",
@@ -582,20 +576,17 @@ modspecs = [
       "IEC Input Type": "Type I",
       "Isolation (field-to-logic)": "300 V working, 1500 V transient (1 minute)",
       "Isolation (channel-to-channel)": "None",
-
       "Chassis Power Consumption": "1.2 W",
-     "Agency Approvals": "UL/cUL(Class 1 Div. 2); CE, ATEX(Category 3, Zone 2), RoHS; DFARS; CB Scheme",
+      "Agency Approvals": "UL/cUL(Class 1 Div. 2); CE, ATEX(Category 3, Zone 2), RoHS; DFARS; CB Scheme",
       "Warranty": "Lifetime"
-      
 	},
 	mechanical: {
- "Wire Size": "28–14 AWG",
+ 	  "Wire Size": "28–14 AWG",
       "Torque, connector screw": "2.5 in-lb (0.28 N-m)",
       "Torque, hold-down screw": "3.5 in-lb (0.4 N-m)",
       "Temperature (operating)": "-20 °C to +70 °C",
       "Temperature (storage)": "-40 °C to +85 °C",
       "Relative Humidity (non-condensing)": "5–95%",
-      
 	},
 },
 
@@ -611,13 +602,11 @@ modspecs = [
 		"Output pulsing" : false,
 		"On/off totalization" : false,
 		"Channel-to-channel isolation" : false,
-		
-		 "Number of Channels": 24,
-		 
+		"Number of Channels": 24,
 	},
 	
 	specifications: {
- "Input Voltage (VDC)": "15–30 VDC",
+ 	  "Input Voltage": "15–30 VDC",
       "Turn ON Characteristic": "15 V, > 2 mA",
       "Turn OFF Characteristic": "5 V, < 0.5 mA",
       "Input Impedance (± 5%)": "Nonlinear per IEC input type",
@@ -625,13 +614,12 @@ modspecs = [
       "IEC Input Type": "Type I",
       "Isolation (field-to-logic)": "300 V working, 1500 V transient (1 minute)",
       "Isolation (channel-to-channel)": "None",
-
       "Chassis Power Consumption": "1.2 W",
       "Agency Approvals": "UL/cUL(Class 1 Div. 2); CE, ATEX(Category 3, Zone 2), RoHS; DFARS; CB Scheme",
       "Warranty": "Lifetime"
 	},
 	mechanical: {
-"Wire Size": "28–14 AWG",
+	  "Wire Size": "28–14 AWG",
       "Torque, connector screw": "2.5 in-lb (0.28 N-m)",
       "Torque, hold-down screw": "3.5 in-lb (0.4 N-m)",
       "Temperature (operating)": "-20 °C to +70 °C",
@@ -652,10 +640,10 @@ modspecs = [
 		"Output pulsing" : false,
 		"On/off totalization" : true,
 		"Channel-to-channel isolation" : true,
-		 "Number of Channels": 12,
+		"Number of Channels": 12,
 	},
 	specifications: {
-	"Input Voltage (VDC)": "10–30 VDC",
+	  "Input Voltage": "10–30 VDC",
       "Turn ON Characteristic": "10 V, > 2 mA",
       "Turn OFF Characteristic": "5 V, < 1.5 mA",
       "Input Impedance (± 5%)": "Nonlinear per IEC input type",
@@ -663,19 +651,17 @@ modspecs = [
       "IEC Input Type": "Type III",
       "Isolation (field-to-logic)": "300 V working, 1500 V transient (1 minute)",
       "Isolation (channel-to-channel)": "300 V working",
-
       "Chassis Power Consumption": "1.2 W",
       "Agency Approvals": "UL/cUL(Class 1 Div. 2); CE, ATEX(Category 3, Zone 2), RoHS; DFARS; CB Scheme",
       "Warranty": "Lifetime"
 	},
 	mechanical: {
-	"Wire Size": "28–14 AWG",
+	  "Wire Size": "28–14 AWG",
       "Torque, connector screw": "2.5 in-lb (0.28 N-m)",
       "Torque, hold-down screw": "3.5 in-lb (0.4 N-m)",
       "Temperature (operating)": "-20 °C to +70 °C",
       "Temperature (storage)": "-40 °C to +85 °C",
       "Relative Humidity (non-condensing)": "5–95%",
-      
 	},
 },
 {
@@ -690,12 +676,10 @@ modspecs = [
 		"Output pulsing" : false,
 		"On/off totalization" : false,
 		"Channel-to-channel isolation" : true,
-		
-		 "Number of Channels": 12,
-		 
+		"Number of Channels": 12,
 	},
 	specifications: {
- "Input Voltage (VDC)": "10–30 VDC",
+ 	  "Input Voltage": "10–30 VDC",
       "Turn ON Characteristic": "10 V, > 2 mA",
       "Turn OFF Characteristic": "5 V, < 1.5 mA",
       "Input Impedance (± 5%)": "Nonlinear per IEC input type",
@@ -710,7 +694,7 @@ modspecs = [
       
 	},
 	mechanical: {
-	"Wire Size": "28–14 AWG",
+	  "Wire Size": "28–14 AWG",
       "Torque, connector screw": "2.5 in-lb (0.28 N-m)",
       "Torque, hold-down screw": "3.5 in-lb (0.4 N-m)",
       "Temperature (operating)": "-20 °C to +70 °C",

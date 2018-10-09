@@ -3,7 +3,7 @@
 function EpicConfigurator(divContainerID){  //data = snappacsystemparts from searchdata.js
 	var sys = {};
 	sys.searchID = '#' + divContainerID;
-	sys.res = "../images/epic/"//live version /Opto22/media/epicconfigurator/
+	sys.res = "images/"//live version /Opto22/media/epicconfigurator/
 	sys.currentIoUnit = [];
 
 	sys.epicConfig =  { 
@@ -65,8 +65,9 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 		{ partNo: 'GRV-ODCSRC-24', iogroup: 'do', colorcode: 'odc', cat: ['odc', 'src'], signal: [0], rangeDes:'5–60 VDC', description: 'DC digital output, 24 channels, 5–60 VDC, sourcing', channels: 24,},
 		{ partNo: 'GRV-OMRIS-8', iogroup: 'do', colorcode: 'odc',  cat: ['oac', 'odc'], signal: [0], rangeDes:'0–250 VAC/5–30 VDC', description: 'AC/DC output, 8 channels, electromechanical Form C relay, 0–250 VAC/5–30 VDC, 5 A', channels: 8,},
 		
-		{ partNo: 'GRV-CSERI-4', iogroup: 'ser', colorcode: 'ser',  cat: ['rs232', 'rs485'], signal: [0], rangeDes:'', description: '', channels: 4,},
+		{ partNo: 'GRV-CSERI-4', iogroup: 'ser', colorcode: 'ser',  cat: ['rs232', 'rs485', 'modem'], signal: [0], rangeDes:'RS-232 and RS-485', description: 'Serial communication module with 4 independent, isolated serial ports for communication with RS-232 or RS-485 serial devices. The module can communicate with RS-485 serial devices in half-duplex (2-wire transmission) or full-duplex (4-wire transmission) mode. Each port is selectable between RS-232 and RS-485, with configurable termination and bias in RS-485 mode. Port 0 can also be configured to handle modem commands. Baud rates of up to 1 Mbps are supported.', channels: 4,},
 	];
+
 	
 	this.init = init;
 	function init(){

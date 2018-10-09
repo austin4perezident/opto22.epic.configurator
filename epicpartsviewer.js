@@ -13,8 +13,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 	list.pointsize = 10;
 	list.imagesArray = [];
 	list.ioCategories = [];
-	list.ioFeatures = ['aia', 'aiv', 'temp', 'lc', 'aoa', 'aov', 'iac', 'idc', 'oac', 'odc', 'simple', 'iso', 'hv', 'src'];
-
+	list.ioFeatures = ['aia', 'aiv', 'temp', 'lc', 'aoa', 'aov', 'iac', 'idc', 'oac', 'odc', 'simple', 'iso', 'hv', 'src', 'rs232', 'rs485'];
 
 	this.init = init;
 	function init(){
@@ -117,7 +116,7 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		});
 		
 		//module features submenu
-		$(list.searchID).find('div#modsubmenu').append('<div id="fdes">Features: (This narrows down the list to only modules will all selected features.)<br/><span class="fmenu" cat="aia" state=0><img class="ifmenu" src="'+list.res+'aia_t.png"/>Amps</span><span class="fmenu" cat="aiv" state=0 ><img class="ifmenu" src="'+list.res+'aiv_t.png"/>Millivolts</span>	<span class="fmenu" cat="temp" state=0><img class="ifmenu" src="'+list.res+'temp_t.png"/>Thermocouple or mV</span>	<span class="fmenu" cat="aoa" state=0><img class="ifmenu" src="'+list.res+'aoa_t.png"/>Current</span>	<span class="fmenu" cat="aov" state=0><img class="ifmenu" src="'+list.res+'aov_t.png"/>Voltage</span><span class="fmenu" cat="iac" state=0><img class="ifmenu" src="'+list.res+'iac_t.png"/>Alternating Current</span>	<span class="fmenu" cat="idc" state=0><img class="ifmenu" src="'+list.res+'idc_t.png"/>Direct Current</span>	<span class="fmenu" cat="oac" state=0><img class="ifmenu" src="'+list.res+'oac_t.png"/>Alternating Current</span>	<span class="fmenu" cat="odc" state=0><img class="ifmenu" src="'+list.res+'odc_t.png"/>Direct Current</span>	<span class="fmenu" cat="simple" state=0><img class="ifmenu" src="'+list.res+'simple_t.png"/>Simple</span>	<span class="fmenu" cat="iso" state=0><img class="ifmenu" src="'+list.res+'iso_t.png"/>Channel-to-channel isolation</span> <span class="fmenu" cat="hv" state=0><img class="ifmenu" src="'+list.res+'hv_t.png"/>High voltage</span> <span class="fmenu" cat="src" state=0><img class="ifmenu" src="'+list.res+'src_t.png"/>Sourced output</span></div>')
+		$(list.searchID).find('div#modsubmenu').append('<div id="fdes">Features: (This narrows down the list to only modules will all selected features.)<br/><span class="fmenu" cat="aia" state=0><img class="ifmenu" src="'+list.res+'aia_t.png"/>Amps</span><span class="fmenu" cat="aiv" state=0><img class="ifmenu" src="'+list.res+'aiv_t.png"/>Millivolts</span>	<span class="fmenu" cat="temp" state=0><img class="ifmenu" src="'+list.res+'temp_t.png"/>Thermocouple or mV</span>	<span class="fmenu" cat="aoa" state=0><img class="ifmenu" src="'+list.res+'aoa_t.png"/>Current</span>	<span class="fmenu" cat="aov" state=0><img class="ifmenu" src="'+list.res+'aov_t.png"/>Voltage</span><span class="fmenu" cat="iac" state=0><img class="ifmenu" src="'+list.res+'iac_t.png"/>Alternating Current</span>	<span class="fmenu" cat="idc" state=0><img class="ifmenu" src="'+list.res+'idc_t.png"/>Direct Current</span>	<span class="fmenu" cat="oac" state=0><img class="ifmenu" src="'+list.res+'oac_t.png"/>Alternating Current</span>	<span class="fmenu" cat="odc" state=0><img class="ifmenu" src="'+list.res+'odc_t.png"/>Direct Current</span>	<span class="fmenu" cat="simple" state=0><img class="ifmenu" src="'+list.res+'simple_t.png"/>Simple</span>	<span class="fmenu" cat="iso" state=0><img class="ifmenu" src="'+list.res+'iso_t.png"/>Channel-to-channel isolation</span> <span class="fmenu" cat="hv" state=0><img class="ifmenu" src="'+list.res+'hv_t.png"/>High voltage</span> <span class="fmenu" cat="src" state=0><img class="ifmenu" src="'+list.res+'src_t.png"/>Sourced output</span><span class="fmenu" cat="rs232" state=0><img class="ifmenu" src="'+list.res+'rs232_t.png"/>Serial RS-232</span><span class="fmenu" cat="rs485" state=0><img class="ifmenu" src="'+list.res+'rs485_t.png"/>Serial RS-485</span></div>')
 			.hide();
 		
 		// ********************** module category buttons *************** //
@@ -409,9 +408,10 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			}
 		});		// ******************** end category/feature tags *********************** //
 		
+		$(list.searchID).find('div.modfeature[cat=rs232]').css({'background': 'url('+list.res + 'rs232.png) no-repeat center', 'width': '34px', 'height': '34px'});
+		$(list.searchID).find('div.modfeature[cat=rs485]').css({'background': 'url('+list.res + 'rs485.png) no-repeat center', 'width': '34px', 'height': '34px'});
 		
-		$(list.searchID).find('div.modfeature[cat=ser]').css({'background': 'url('+list.res + 'ser_sm.png) no-repeat center', 'width': '34px', 'height': '34px'});
-		
+	
 		$(list.searchID).find('div.modfeature[cat=aia]').css({'background': 'url('+list.res + 'aia_sm.png) no-repeat center', 'width': '34px', 'height': '34px'});
 		$(list.searchID).find('div.modfeature[cat=aiv]').css({'background': 'url('+list.res + 'aiv_sm.png) no-repeat center', 'width': '34px', 'height': '34px'});
 		$(list.searchID).find('div.modfeature[cat=temp]').css({'background': 'url('+list.res + 'temp_sm.png) no-repeat center', 'width': '34px', 'height': '34px'});
