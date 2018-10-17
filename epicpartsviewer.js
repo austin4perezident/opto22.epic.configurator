@@ -1,6 +1,6 @@
 // JavaScript Document, parts viewer
 
-function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartCmd, showPartCmd, res){  //partsIO, partsPwr, and partsCtlr are resources of parts
+function EpicPartsViewer(divContainerID, sendPartCmd, showPartCmd, res, partsSW, partsCtlr, partsPwr, partsIO){  //partsIO, partsPwr, and partsCtlr are resources of parts
 //sendPartCmd sends to the epic I/O unit. Res is location of artwork.
 
 	var list = {};
@@ -18,7 +18,64 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 	this.init = init;
 	function init(){
 		
-		$('#' + divContainerID).append('<div id="'+ list.id +'"><div class="selector" id="ctlrSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">EPIC Controller</td><td class="showhide"></td></tr></table></div><div class="selector" id="pwrSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">EPIC Power Supplies</td><td class="showhide"></td></tr></table></div><div class="selector" id="ioSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">Input/Output Modules</td><td class="showhide"></td></tr></table></div></div>');
+		$('#' + divContainerID).append('<div id="'+ list.id +'"><div class="selector" id="swSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">Software</td><td class="showhide"></td></tr></table></div><div class="selector" id="ctlrSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">EPIC Controller</td><td class="showhide"></td></tr></table></div><div class="selector" id="pwrSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">EPIC Power Supplies</td><td class="showhide"></td></tr></table></div><div class="selector" id="ioSelector" state="0"><table class="selTitle"><tr><td style="padding-left:20px;">Input/Output Modules</td><td class="showhide"></td></tr></table></div></div>');
+		
+		// ************************************************************************************** //
+		// *************************** build software selector ********************************* //
+		var $sw = $(list.searchID).find('div#swSelector').append('<div style="margin: 4px 20px"><p>The groov EPIC includes software need to control, monitor, share data, and connect with web services. Here is an interactive overview what each software component does and how it fit within the groov EPIC system: </p><div id="swdemo"><button id="swd_log" state=0><img src="'+list.res+'sw_controllogic.png"/><br/>Control Logic</button>&nbsp;<button id="swd_hmi" state=0><img src="'+list.res+'sw_hmi.png"/><br/>User Interface</button>&nbsp;<button id="swd_ent" state=0><img src="'+list.res+'sw_enterprise.png"/><br/>Enterprise</button>&nbsp;<button id="swd_3p" state=0><img src="'+list.res+'sw_3rdparty.png"/><br/>Interoperability</button>&nbsp;<button id="swd_ws" state=0><img src="'+list.res+'sw_webservices.png"/><br/>Web services</button>&nbsp;</div><div id="swlist"></div>');
+		
+		var swlist = '';
+		for (var s=0; s<partsSW.length; s++){
+			var partNo = partsSW[s].partNo;
+			var des = partsSW[s].description;
+			swlist += '<div class="part" index="'+s+'"><p>'+partNo+':&nbsp;'+des + '</p></div>';
+		}
+		$(list.searchID).find('div#swlist').append(swlist);
+		
+		$(list.searchID).find('button.swlist').on('click', this, function(e){
+			e.preventDefault();
+			var button = $(this);
+			button.css('#333'); //cludge for ie and iPhone, which ignore the following command but do this one; must precede following for other platforms to work
+			button.css({'background': '#333', 'color': '#fff', });
+
+			button.siblings('button[class="swlist"]').css('color', '#fff') //#276193
+				.css('background-color', '#C62F2F')//ab0d0d
+				//cludge for ie and iPhone, which ignore the following command but do this one; must precede following for other platforms
+				.css('background', '#C62F2F');
+			
+			switch(button.attr('id')){
+				case 'swdemobtn':
+					$(list.searchID).find('div#swdemo').show()
+						.siblings('div').hide();
+				break;
+				case 'swlistbtn':
+					$(list.searchID).find('div#swlist').show()
+						.siblings('div').hide();
+				break;
+			}	
+		});
+		
+		$(list.searchID).find('div#swlist').hide();
+		var imgsrc = list.res+'swdemobtnbkgd.png';
+		$(list.searchID).find('button#swlistbtn').css({'background': '#C62F2F', 'color': '#fff', 'border':'none',});
+		
+		//Where am I? Trying to make a graphic as a background
+		$(list.searchID).find('button#swdemobtn').css({'background': '#333', 'color': '#fff', 'border':'none', });//'background-image': 'url ("images/swdemobtnbkgd.png") no-repeat'
+	
+		var url = list.res + 'swdemo.svg'; 
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", url, true); // ajax.open("GET", url + ".svg", true);
+		ajax.send();
+		ajax.onload = function(e) {
+			//var firstG = ajax.responseText.indexOf('<g>')
+			//var lastG = ajax.responseText.lastIndexOf('</g>')
+			//var slice1 = ajax.responseText.slice(firstG, lastG+4);
+			//var image = '<svg>'+slice1+'</svg>'
+			var image = ajax.responseText;
+			$(list.searchID).find('div#swdemo').append(image);
+			list.enableSwDemo();
+
+		}; 
 		
 		// ********************************************************************************************
 		// *************************** build Controller Selector **************************** //
@@ -205,6 +262,21 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 		// ******************* end build I/O selector ********************** //
 		// ****************** selector category titles *********************** //
 		$(list.searchID).find('table.selTitle').css({'width': '100%', 'background-color': '#C62F2F', 'color': '#fff'});
+		
+		$(list.searchID).find('div#swSelector').find('table.selTitle').on('click', this, function(){
+				var selector = $(this).parent('div.selector');
+				var state = selector.attr('state');
+				if (state == 0){
+					selector.attr('state', 1);
+					selector.children('div').show()
+						.css('border', '');
+					selector.find('td.showhide').css({'background': 'url('+list.res + 'arrowdown_white.png) no-repeat center'});
+				} else {
+					selector.attr('state', 0);
+					selector.children('div').hide();
+					selector.find('td.showhide').css({'background': 'url('+list.res+ 'arrowleft_white.png) no-repeat center'});
+				}
+			});
 		
 		$(list.searchID).find('div#ctlrSelector').find('table.selTitle').on('click', this, function(){
 				var selector = $(this).parent('div.selector');
@@ -729,5 +801,165 @@ function EpicPartsViewer(divContainerID, partsIO, partsPwr, partsCtlr, sendPartC
 			}
 		}
 	};
+	
+	list.enableSwDemo = function(){
+		list.coreSelected = 0;
+		var dim = 0.3;
+		var btnColor = '#ddd';
+		var btnSelColor = '#333';
+		var delay = 500
+
+		// *************** control logic ****************** //
+		$(list.searchID).find('button#swd_log').on('mouseover', this, function(){
+			$(list.searchID).find('g#overlaycontrol').show();
+		})
+		.on('mouseout', this, function(){
+			$(list.searchID).find('g#overlaycontrol').hide();
+		})
+		.on('click', this, function(e){
+			e.preventDefault();
+			var bttn = $(this);
+			
+			if (bttn.attr('state')==0){ //show logic
+				$(list.searchID).find('g#detailcontrol').animate({'opacity': 1}, delay)
+					.siblings('g.detail').animate({'opacity': 0}, delay);
+				$(list.searchID).find('g#corelogic').animate({'opacity': 1}, delay)
+					.siblings('g.core').animate({'opacity': 0}, delay);
+				bttn.attr('state', 1);
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.siblings('button').css({'background-color': btnColor, 'color': '#000'})
+					.attr('state', 0);
+					
+				$(list.searchID).find('g.overlay').attr('opacity', 0);
+			} else {
+				$(list.searchID).find('g.detail').animate({'opacity': 0}, delay);
+				$(list.searchID).find('g.core').animate({'opacity': 1}, delay);
+				bttn.attr('state', 0);
+				bttn.css({'background-color': btnColor, 'color': '#000'});
+				$(list.searchID).find('g.overlay').attr('opacity', 1);
+			}
+		});
+		
+		// *************** groov HMI **************** //
+		$(list.searchID).find('button#swd_hmi').on('mouseover', this, function(){
+			$(list.searchID).find('g#overlaygroov').show();
+		})
+		.on('mouseout', this, function(){
+			$(list.searchID).find('g#overlaygroov').hide();
+		})
+		.on('click', this, function(e){
+			e.preventDefault();
+			var bttn = $(this);
+			if (bttn.attr('state')==0){
+				$(list.searchID).find('g#detailgroov').animate({'opacity': 1}, delay)
+					.siblings('g.detail').animate({'opacity': 0}, delay);
+				$(list.searchID).find('g#coregroov').animate({'opacity': 1}, delay)
+					.siblings('g.core').animate({'opacity': 0}, delay);
+				bttn.attr('state', 1);
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.siblings('button').css({'background-color': btnColor, 'color': '#000'})
+					.attr('state', 0);
+				$(list.searchID).find('g.overlay').attr('opacity', 0);
+			} else {
+				$(list.searchID).find('g#detailgroov').animate({'opacity': 0}, delay);
+				$(list.searchID).find('g.core').animate({'opacity': 1}, delay);
+				bttn.attr('state', 0);
+				bttn.css({'background-color': btnColor, 'color': '#000'});
+				$(list.searchID).find('g.overlay').attr('opacity', 1);
+			}
+		});
+		
+		// *************** enterprise applications ***************** //
+		$(list.searchID).find('button#swd_ent').on('mouseover', this, function(){
+			$(list.searchID).find('g#overlayenterprise').show();
+		})
+		.on('mouseout', this, function(){
+			$(list.searchID).find('g#overlayenterprise').hide();
+		})
+		.on('click', this, function(e){
+			e.preventDefault();
+			var bttn = $(this);
+			if (bttn.attr('state')==0){
+				$(list.searchID).find('g#detailenterprise').animate({'opacity': 1}, delay)
+					.siblings('g.detail').animate({'opacity': 0}, delay)
+				$(list.searchID).find('g#coreenterprise').animate({'opacity': 1}, delay)
+					.siblings('g.core').animate({'opacity': 0}, delay);
+					
+				bttn.attr('state', 1);
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.siblings('button').css({'background-color': btnColor, 'color': '#000'})
+					.attr('state', 0);
+				$(list.searchID).find('g.overlay').attr('opacity', 0);
+			} else {
+				$(list.searchID).find('g#detailenterprise').animate({'opacity': 0}, delay)
+				$(list.searchID).find('g.core').animate({'opacity': 1}, delay);
+				bttn.attr('state', 0);
+				bttn.css({'background-color': btnColor, 'color': '#000'});
+				$(list.searchID).find('g.overlay').attr('opacity', 1);
+			}
+		});
+		
+		// *************** 3rd party controllers ******************* //
+		$(list.searchID).find('button#swd_3p').on('mouseover', this, function(){
+			$(list.searchID).find('g#overlay3rdparty').show();
+		})
+		.on('mouseout', this, function(){
+			$(list.searchID).find('g#overlay3rdparty').hide();
+		})
+		.on('click', this, function(e){
+			e.preventDefault();
+			var bttn = $(this);
+			if (bttn.attr('state')==0){
+				$(list.searchID).find('g#detail3rdparty').animate({'opacity': 1}, delay)
+					.siblings('g.detail').animate({'opacity': 0}, delay);
+				$(list.searchID).find('g#core3rdparty').animate({'opacity': 1}, delay)
+					.siblings('g.core').animate({'opacity': 0}, delay);
+				bttn.attr('state', 1);
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.siblings('button').css({'background-color': btnColor, 'color': '#000'})
+					.attr('state', 0);
+				$(list.searchID).find('g.overlay').attr('opacity', 0);
+			} else {
+				$(list.searchID).find('g#detail3rdparty').animate({'opacity': 0}, delay)
+				$(list.searchID).find('g.core').animate({'opacity': 1}, delay);
+				bttn.attr('state', 0);
+				bttn.css({'background-color': btnColor, 'color': '#000'});
+				$(list.searchID).find('g.overlay').attr('opacity', 1);
+			}
+		});
+		
+		// *************** web serveces ********************* //
+		$(list.searchID).find('button#swd_ws').on('mouseover', this, function(){
+			$(list.searchID).find('g#overlaywebserv').show();
+		})
+		.on('mouseout', this, function(){
+			$(list.searchID).find('g#overlaywebserv').hide();
+		})
+		.on('click', this, function(e){
+			e.preventDefault();
+			var bttn = $(this);
+			if (bttn.attr('state')==0){
+				$(list.searchID).find('g#detailwebserv').animate({'opacity': 1}, delay)
+					.siblings('g.detail').animate({'opacity': 0}, delay);
+				$(list.searchID).find('g#corewebserv').animate({'opacity': 1}, delay)
+					.siblings('g.core').animate({'opacity': 0}, delay);
+				bttn.attr('state', 1);
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.css({'background-color': btnSelColor, 'color': '#fff'});
+				bttn.siblings('button').css({'background-color': btnColor, 'color': '#000'})
+					.attr('state', 0);
+				$(list.searchID).find('g.overlay').attr('opacity', 0);
+			} else {
+				$(list.searchID).find('g#detailwebserv').animate({'opacity': 0}, delay)
+				$(list.searchID).find('g.core').animate({'opacity': 1}, delay);
+				bttn.attr('state', 0);
+				bttn.css({'background-color': btnColor, 'color': '#000'});
+				$(list.searchID).find('g.overlay').attr('opacity', 1);
+			}
+		});
+	}
 }
 

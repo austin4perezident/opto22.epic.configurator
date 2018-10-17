@@ -14,15 +14,30 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 		io_array: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ],
 	//	io_array: ['', 'GRV-IV-24', 'GRV-ITMI-8', 'GRV-IMA-24', '', 'GRV-IDC-12', 'GRV-IAC-24', 'GRV-IACS-24', 'GRV-IACHV-24', 'GRV-IACI-12', 'GRV-IACDCTTL-24', 'GRV-IACDCTTLS-24', 'GRV-OVMALC-8', '', 'GRV-ODCSRC-24', '', ], //GRV-IDC-24, GRV-ODC-24, ,GRV-CSER-4, GRV-OMRIS-8
 		accessories: [],
+		software: ['PACPROJECTBAS', 'GROOVMANAGE', 'GROOVVIEW', 'NODERED', 'EDGE',]
 	};
 		
 	sys.userConfigurations = [];
 	
-	sys.ctlr = [{partNo: 'GRV-EPIC-PR1', description: 'The GRV-EPIC-PR1 provides the I/O management, programming logic, and communication via a variety of means....', 	
-					images: [
-					{image: 'GRV-EPIC-PR1.png', description: 'groov EPIC Controller with touch-screen panel open'}, 
-					{image: 'GRV-EPIC-PR1_2.png', description: 'Two Ethernet ports, HDMI and USB'},	
-					{image: 'GRV-EPIC-PR1_3.png', description: 'groov EPIC controller with touch-screen panel closed'}],}, ];
+	sys.software = [
+		{partNo: 'PACPROJECTBAS', name:'PAC Project Basic', description: 'PAC Project Basic Automation Software Suite, including PAC Control Basic and PAC Display Basic',}, 
+		{partNo: 'GROOVMANAGE', name:'groov Manage', description: 'Manage Touchscreen or web-based tool to configure and troubleshoot I/O and network',}, 
+		{partNo: 'GROOVVIEW', name:'groov View', description: 'Browser-based tool to build and view operator interfaces on any device; includes trends, events, and notifications',},
+		{partNo: 'NODERED', name:'Node-RED', description: 'Open-source, multi-platform software tool for building simple logic flows to wire together databases, cloud applications, and APIs'}, 
+		{partNo: 'EDGE', name:'Ignition Edge', description: 'A product of Inductive Automation; OPC-UA drivers for Allen-Bradley, Siemens, and Modbus/TCP; MQTT transport with Sparkplug payload'}, 
+	];
+	
+	sys.ctlr = [
+		{
+			partNo: 'GRV-EPIC-PR1', 
+			description: 'The GRV-EPIC-PR1 provides the I/O management, programming logic, and communication via a variety of means....', 	
+			images: [
+				{image: 'GRV-EPIC-PR1.png', description: 'groov EPIC Controller with touch-screen panel open'}, 
+				{image: 'GRV-EPIC-PR1_2.png', description: 'Two Ethernet ports, HDMI and USB'},	
+				{image: 'GRV-EPIC-PR1_3.png', description: 'groov EPIC controller with touch-screen panel closed'},
+			],
+		}, 
+	];
 	
 	sys.pwr = [
 		{partNo: 'GRV-EPIC-PSAC', description: 'Power supply, 110–240 VAC. The GRV-EPIC-PSAC power supply provides power for a groov EPIC chassis with a GRV-EPIC-PR1 processor, and groov® I/O modules mounted on the chassis.'},
@@ -62,18 +77,16 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 
 		{ partNo: 'GRV-ODCI-12', iogroup: 'do', colorcode: 'odc', cat: ['odc', 'iso'], signal: [0], rangeDes:'5–60 VDC', description: 'DC digital output, 12 channels, 5–60 VDC, channel-to-channel isolation', channels: 12,},
 		{ partNo: 'GRV-ODCIS-12', iogroup: 'do', colorcode: 'odc', cat: ['odc', 'iso', 'simple'], signal: [0], rangeDes:'5–60 VDC', description: 'DC digital output, 12 channels, 5–60 VDC, channel-to-channel isolation, on/off only', channels: 12,},
-		{ partNo: 'GRV-ODCSRC-24', iogroup: 'do', colorcode: 'odc', cat: ['odc', 'src'], signal: [0], rangeDes:'5–60 VDC', description: 'DC digital output, 24 channels, 5–60 VDC, sourcing', channels: 24,},
+		{ partNo: 'GRV-ODCSRC-24', iogroup: 'do', colorcode: 'odc', cat: ['odc', 's rc'], signal: [0], rangeDes:'5–60 VDC', description: 'DC digital output, 24 channels, 5–60 VDC, sourcing', channels: 24,},
 		{ partNo: 'GRV-OMRIS-8', iogroup: 'do', colorcode: 'odc',  cat: ['oac', 'odc'], signal: [0], rangeDes:'0–250 VAC/5–30 VDC', description: 'AC/DC output, 8 channels, electromechanical Form C relay, 0–250 VAC/5–30 VDC, 5 A', channels: 8,},
 		
 		{ partNo: 'GRV-CSERI-4', iogroup: 'ser', colorcode: 'ser',  cat: ['rs232', 'rs485', 'modem'], signal: [0], rangeDes:'RS-232 and RS-485', description: 'Serial communication module with 4 independent, isolated serial ports for communication with RS-232 or RS-485 serial devices. The module can communicate with RS-485 serial devices in half-duplex (2-wire transmission) or full-duplex (4-wire transmission) mode. Each port is selectable between RS-232 and RS-485, with configurable termination and bias in RS-485 mode. Port 0 can also be configured to handle modem commands. Baud rates of up to 1 Mbps are supported.', channels: 4,},
 	];
 
-	
 	this.init = init;
 	function init(){
 		
-		$(sys.searchID).append('<div class="menu"><button class="topic" id="bttnConfig">Configure groov EPIC</button><button class="topic" id="buy">Review</button><button class="topic" id="bttnOv">Help</button></div><div class="content" id="overview"></div><div class="content" id="configurator"><div class="top" id="iounits"></div><div class="bottom" id="parts"></div></div><div class="content" id="review"></div>');
-		
+		$(sys.searchID).append('<div class="menu"><button class="topic" id="bttnConfig">Configure groov EPIC</button>&nbsp;<button class="topic" id="buy">Review</button>&nbsp;<button class="topic" id="bttnOv">Help</button></div><div class="content" id="overview"></div><div class="content" id="configurator"><div class="top" id="iounits"></div><div class="bottom" id="parts"></div></div><div class="content" id="review"></div>');
 		
 		$('div#iounits').css({'border-color': '#00aaff', 'border-width': '1px', 'float': 'left', 'width':'45%'});
 		$('div#parts').css({'border-color': '#F00', 'overflow-y': 'scroll', }); // 'height': '900px'
@@ -109,26 +122,20 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 			}	
 		});
 		
-		$(sys.searchID).find('button.topic').css({'background':'#ab0d0d', 'color': '#fff', 'font-size': '1.3em', 'padding-bottom':'0.2em', 'margin-bottom': '0.2em'});
+		$(sys.searchID).find('button.topic').css({'background':'#ab0d0d', 'color': '#fff', 'font-size': '1.3em', 'padding-bottom':'0.2em', 'margin-bottom': '0.2em', 'border':'none'});//
 		$(sys.searchID).find('button#bttnConfig').css({'background': '#333'});
 		
 		$(sys.searchID).find('div#iounits').css({'padding':'10px'});
 		$(sys.searchID).find('div#parts').css({'padding':'10px'});
 		
 		// *********** end main topic buttons ************** //
-		/*
-		$(sys.searchID).find('button#getuserconfigs').on('click', this, function(e){
-			e.preventDefault();
-			sys.getUserConfigs();
-		});
-		*/
-		
+	
 		// *********************** build I/O unit and parts viewer ************************* //
 		//(divContainerID, id, lookuppart, showparts, showsearch, config, res)
 		sys.epicIoUnit = new EpicIoUnit('iounits', 'id',  sys.lookupPart, sys.showPart, sys.epicConfig, sys.res);
 		var tempArray = sys.epicIoUnit.init();
 
-		sys.epicPartsViewer = new EpicPartsViewer('parts', sys.io, sys.pwr, sys.ctlr, tempArray[0], sys.showPart, sys.res);
+		sys.epicPartsViewer = new EpicPartsViewer('parts', tempArray[0], sys.showPart, sys.res, sys.software, sys.ctlr, sys.pwr, sys.io);
 		sys.showPartInViewer = sys.epicPartsViewer.init(); //this returns one function in epicPartsViewer that will display the selector and/or highlight a specific part when passed 
 		//a string containing either a part type 'ctrl', 'mod', pwr or "details" ;
 		
@@ -158,6 +165,22 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 				sys.showPartInViewer(partNumber, 'details')
 			break;
 		}
+	};
+	
+	sys.lookupSoftware = function(partNumber, data){
+		if (data) {
+			
+		} else {
+			data = sys.software;
+		}
+		var obj = {};
+		
+		for (var i=0; i<data.length; i++){
+			if(partNumber == data[i].partNo){
+				obj = data[i];
+			}
+		}
+		return obj;
 	};
 	
 	sys.lookupPart = function(partNumber){
@@ -203,49 +226,57 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 		}
 	};
 	
-
-	
-	
 	sys.readConfig = function(){
-		$('div#review').children('.report').remove();
+	$('div#review').children('.report').remove();
 		$('div#review').children('svg').remove();
 		sys.epicReview = new EpicReview('review', 'epicRev',  sys.lookupPart, sys.showPart, sys.epicConfig, sys.res);
 		var tempArray = sys.epicReview.init();
 		var config = sys.currentIoUnit[1](); //function returned from I/O unit that retrieves it's configuration data.
 		var string = '<div class="report">';
+		
+		// **************** software list ********************** //
+		string += '<table class="rpt"><tr><td>Software:</td><td>Product Name</td><td>&nbsp;</td><td>Description</td><td></td></tr>';
+		for (var n=0; n<config.software.length; n++){
+			var swobj = sys.lookupSoftware(config.software[n])
+			string += '<tr><td>&nbsp;</td><td>'+swobj.name+'</td><td>&nbsp;</td><td>'+swobj.description+'</td><td></td></tr>';
+		}
+		string += '</table><br/><table class="rpt">'
+		
+		// ************* chassis, controller and power supply ****************** //
 		if (config.controller !==''){
 			var lowercase = config.controller.toLowerCase();
 			var htext = 'https://www.opto22.com/products/product-container/' + lowercase;
-			var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>'
-			string += '<table class="rpt"><tr><td>Controller:</td><td>'+config.controller+'</td><td></td><td>'+hlink+'</td></tr>';
+			var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>';
+			string += '<tr><td>Controller:</td><td>'+config.controller+'</td><td></td><td>'+hlink+'</td></tr>';
 		}
+		
 		if (config.chassis !==''){
 			var lowercase = config.chassis.toLowerCase();
 			var htext = 'https://www.opto22.com/products/product-container/' + lowercase;
-			var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>'
-
+			var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>';
 			string += '<tr><td>Chassis: </td><td>'+config.chassis+'</td><td id="csize" style="color: #ff0000"></td><td>'+hlink+'</td></tr>';
 		}
+		
 		if (config.powersupply !== ''){
 			var lowercase = config.powersupply.toLowerCase();
 			var htext = 'https://www.opto22.com/products/product-container/' + lowercase;
-			var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>'
-			
+			var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>';
 			string += '<tr><td>Power Supply: </td><td>'+config.powersupply+'</td><td></td><td>'+ hlink +'</td></tr>';
 		} else {//warn that a power supply selection is needed.
 			string += '<tr><td>Power Supply: </td><td style="color: #ff0000">Warning! No power supply selected.</td></tr>';
 		}
+		string+='</table><br/><table class="rpt">'
 		
+		// ********************** I/O modules ********************* //
 		string +='<tr><td>Modules:</td><td id="modwarning" style="color: #ff0000"></td></tr><tr><td>Position</td><td>Part Number</td><td>Channels</td><td>Description</td><tr>';
 		var modwarning = true;
 		var countModules = 0;
 		var highestModPosition = 0;
 		for (var i=0; i<16; i++){
 			if(config.io_array[i] !==""){
-				
 				var lowercase = config.io_array[i].toLowerCase();
 				var htext = 'https://www.opto22.com/products/product-container/' + lowercase;
-				var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>'
+				var hlink = '<a href="'+ htext +'" target="_blank">'+ htext +'</a>';
 				
 				countModules += 1;
 				var obj = sys.lookupPart(config.io_array[i]);
@@ -258,7 +289,7 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 			}
 		}
 		
-		string += '<table></div>';
+		string += '</table></div>';
 		$('div#review').append(string);
 		
 		if ((highestModPosition >= config.size)&&(countModules > config.size)){
@@ -270,63 +301,5 @@ function EpicConfigurator(divContainerID){  //data = snappacsystemparts from sea
 		}
 	//	$('table.rpt').css({'border-width': '1px', 'border-style': 'solid'});
 	};	
-	
-	/*
-	sys.getUserConfigs = function() {
-		sys.userConfigurations[0] =  { name: 'Large system', chassis: 'GRV-EPIC-CHS16', controller: 'GRV-EPIC-PR1', powersupply: 'GRV-EPIC-PSDC', io_array: ['GRV-OVMALC-8', 'GRV-IV-24', 'GRV-ITMI-8', 'GRV-IMA-24', 'GRV-OMRIS-8', 'GRV-ODCSRC-24', 'GRV-ODCIS-12', 'GRV-ODCI-12', 'GRV-OACIS-12', 'GRV-OACI-12', 'GRV-OACS-12', 'GRV-OAC-12', 'GRV-IACDCTTLS-24', 'GRV-IACDCTTL-24', 'GRV-IDCIS-12', 'GRV-IDCI-12',],};
-		sys.userConfigurations[1] =  { name: 'Small system', chassis: 'GRV-EPIC-CHS8', controller: 'GRV-EPIC-PR1', powersupply: 'GRV-EPIC-PSDC', io_array: ['GRV-OVMALC-8', 'GRV-IV-24', 'GRV-ITMI-8', 'GRV-IMA-24', '', '', '', '', '', '', '', '', '', '', '', '',],};
-		
-		$('div#userconfigs').children('.config').remove();
-		
-		for (var n=0; n<sys.userConfigurations.length; n++){
-			var string = '<div class="config"><hr/>Configuration Name: '+sys.userConfigurations[n].name+'&nbsp;&nbsp;<button class="loaduserconfig" index="'+n+'">Load Configuration</button></div><br/>';
-			if (sys.userConfigurations[n].controller !==''){
-				string += '<table class="userconfig"><tr><td>Controller:</td><td>'+sys.userConfigurations[n].controller+'</td></tr>';
-			}
-			if (sys.userConfigurations[n].chassis !==''){
-				string += '<tr><td>Chassis: </td><td>'+sys.userConfigurations[n].chassis+'</td></tr>';
-			}
-			if (sys.userConfigurations[n].powersupply !== ''){
-				string += '<tr><td>Power Supply: </td><td>'+sys.userConfigurations[n].powersupply+'</td></tr>';
-			} else {
-				string += '<tr><td>Power Supply: </td><td style="color: #ff0000">Warning! No power supply selected.</td></tr>';
-				//warn that a power supply selection is needed.
-			}
-			
-			string +='<tr><td>Modules:</td><td id="modwarning" style="color: #ff0000"></td></tr><tr><td>Position</td><td>Part Number</td><td>Channels</td><td>Description</td><tr>';
-			var modwarning = true;
-			
-			for (var i=0; i<16; i++){
-				if(sys.userConfigurations[n].io_array[i] !==""){
-					var obj = sys.lookupPart(sys.userConfigurations[n].io_array[i]);
-					string += '<tr><td style="text-align:center">'+ i +'</td><td> ' + sys.userConfigurations[n].io_array[i] + '</td><td style="text-align:center">'+obj.channels+'</td><td>'+obj.description+'</td></tr>';
-					modwarning = false;
-				} else {
-					
-				}
-			}
-			
-			string += '<table></div>';
-			$(sys.searchID).find('div#userconfigs').append(string);
-			
-			if(modwarning == true){
-				$('td#modwarning').text('Warning: No modules selected');
-			}
-			$('table.userconfig').css({'border-width': '1px', 'border-style': 'solid'});
-		}
-		
-		$(sys.searchID).find('button.loaduserconfig').on('click',this, function(e){
-			e.preventDefault();
-			var index = $(this).attr('index');
-			sys.currentIoUnit[2](sys.userConfigurations[index]);
-		});
-		
-		
-	};
-	*/
-	
-	sys.saveConfig = function() {
-		
-	};
 	
 }

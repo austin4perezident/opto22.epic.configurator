@@ -87,7 +87,7 @@ function EpicIoUnit(divContainerID, id, lookuppart, showpart, config, res){
 		$(epic.searchID).append(epic.svgtemplate);
 	
 		// ************************* clear I/O button  *************************** //
-		$(epic.searchID).find('button#clearIO').css({'background':'#ab0d0d', 'color': '#fff', 'font-size': '1.2em', 'padding-bottom': '0.1em', 'margin-bottom': '0.2em'})
+		$(epic.searchID).find('button#clearIO').css({'background':'#ab0d0d', 'color': '#fff', 'font-size': '1.2em', 'padding-bottom': '0.1em', 'margin-bottom': '0.2em', 'border':'none'})
 			.on('click', this, function(e){
 				e.preventDefault();
 				// Assess whether there is any I/O to clear. 
